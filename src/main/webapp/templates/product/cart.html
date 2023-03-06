@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>MovieRelics</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <script src="static/js/main.js" defer></script>
+</head>
+
+
+<body>
+
+
+<div class="cart-container">
+    <div class="login-header">
+        <h1>Your Cart </h1>
+    </div>
+    <div class="list-of-products">
+        <table>
+            <tr th:each="prod,iterStat : ${products}">
+                <td>
+                    <img class="productImage" src="http://placehold.it/400x250/000/fff"
+                         th:height="100"
+                         th:width="120"
+                         th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                </td>
+                <td  th:text="${prod.name}">
+                    PRODUCT NAME,
+                </td>
+                <td th:text="${prod.getPrice()}">
+                    PRICE
+                </td>
+                <td th:text="'Qty: ' + ${prod.getQuantity()}">
+                </td>
+                <td>
+                    <button class="btn btn-success plus-minus-remove-quantity plus-button" th:attr="data-product-id=${prod.id}">
+                        +
+                    </button>
+                    <button  class="btn btn-success plus-minus-remove-quantity minus-button"  th:attr="data-product-id=${prod.id}">
+                        -
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-success plus-minus-remove-quantity buttonRemove" th:attr="data-product-id=${prod.id}">
+                        REMOVE
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="end-of-list">
+        <button type="submit" class="btn btn-success"><a id="checkout-button" href="/checkout">Checkout</a></button>
+    </div>
+
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+</body>
+</html>
