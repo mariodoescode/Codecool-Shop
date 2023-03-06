@@ -35,16 +35,29 @@
     <h1>eFrario</h1>
 </div>
 
+<dl>
+    <dd>
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Filter by category</button>
+            <div id="myDropdown" class="dropdown-content">
+                <span th:each="category,iterStat : ${categories}">
+                    <a th:href="@{'/?category=' + ${category.id}}" th:text="${category.name}"></a>
+                </span>
+            </div>
+        </div>
+    </dd>
 
-<div class="dropdown">
-    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-    <div id="myDropdown" class="dropdown-content">
-        <span th:each="category,iterStat : ${categories}">
-            <a th:href="@{'/?category=' + ${category.id}}" th:text="${category.name}"></a>
-        </span>
-    </div>
-</div>
-
+    <dd>
+        <div class="dropdown">
+            <button onclick="myFunctionSup()" class="dropbtn">Filter by suppliers</button>
+            <div id="myDropdownSup" class="dropdown-content">
+                <span th:each="supplier,iterStat : ${suppliers}">
+                    <a th:href="@{'/?supplier=' + ${supplier.id}}" th:text="${supplier.name}"></a>
+                </span>
+            </div>
+        </div>
+    </dd>
+</dl>
 
 <div class="container">
 <!--    <div class="card">-->
