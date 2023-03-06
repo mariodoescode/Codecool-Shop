@@ -1,3 +1,14 @@
+const laptopButton = document.querySelector("#laptop");
+const tabletButton = document.querySelector("#tablet");
+
+// tabletButton.addEventListener("click", e => {
+//     fetch(`/homepage?category=${e.target.firstChild.data}`).then(r => r.json()).then(data => console.log(data));
+// })
+
+
+
+
+
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
