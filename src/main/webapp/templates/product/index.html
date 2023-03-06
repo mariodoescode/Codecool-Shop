@@ -32,23 +32,24 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <h1>eFrario</h1>
 </div>
 
 
 <div class="dropdown">
     <button onclick="myFunction()" class="dropbtn">Dropdown</button>
     <div id="myDropdown" class="dropdown-content">
-        <a id="tablet" th:href="@{'/?category=1'}" >Tablet</a>
-        <a id="laptop" th:href="@{'/?category=2'}" >Laptops</a>
+        <span th:each="category,iterStat : ${categories}">
+            <a th:href="@{'/?category=' + ${category.id}}" th:text="${category.name}"></a>
+        </span>
     </div>
 </div>
 
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
+<!--    <div class="card">-->
+<!--        <strong th:if="${category.name != null}" th:text="${category.name}"></strong>-->
+<!--    </div>-->
 
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">

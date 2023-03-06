@@ -2,8 +2,10 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
 import org.thymeleaf.TemplateEngine;
@@ -15,8 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -25,19 +25,30 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
+        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        ProductService productService = new ProductService(productDataStore,productCategoryDataStore, supplierDataStore);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        if (req.getParameter("category") == null) {
-            context.setVariable("category", productService.getProductCategory(1));
-            context.setVariable("products", productService.getProductsForCategory(1));
+        if (req.getParameter("category") != null) {
+            String IdFromURL = req.getParameter("category");
+            int convertedIDFromURL = Integer.parseInt(IdFromURL);
+            context.setVariable("products", productService.getProductsForCategory(convertedIDFromURL));
+        } else if (req.getParameter("supplier") != null){
+            String IdFromURL = req.getParameter("supplier");
+            int convertedIDFromURL = Integer.parseInt(IdFromURL);
+            context.setVariable("products", productService.getProductsForSupplier(convertedIDFromURL));
         } else {
-            context.setVariable("category", productService.getProductCategory((Integer.parseInt(req.getParameter("category")))));
-            context.setVariable("products", productService.getProductsForCategory(Integer.parseInt(req.getParameter("category"))));
+            //  GET ALL PRODUCTS
+            context.setVariable("products", productService.getAllProducts());
         }
 
-        engine.process("product/index.html", context, resp.getWriter());
-    }
+        // CHOOSABLE CATEGORIES FOR SORT
+        context.setVariable("categories", productService.getAllProductCategory());
+        // CHOOSABLE SUPPLIERS FOR SORT
+        context.setVariable("suppliers", productService.getAllProductSupplier());
 
+        engine.process("product/index.html", context, resp.getWriter());
+
+    }
 }
