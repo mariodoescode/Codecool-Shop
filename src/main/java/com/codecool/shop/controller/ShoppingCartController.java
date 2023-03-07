@@ -16,12 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 
 @WebServlet(urlPatterns = {"/shopping-cart"})
 public class ShoppingCartController extends HttpServlet {
 
     ProductDao productDao = ProductDaoMem.getInstance();
     ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
+
+    private BigDecimal totalPrice;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
@@ -49,6 +52,7 @@ public class ShoppingCartController extends HttpServlet {
             }
         }
         context.setVariable("products",shoppingCart.getAllProducts());
+        context.setVariable("totalPrice",shoppingCart.getTotalPrice());
 
         PrintWriter out = response.getWriter();
 

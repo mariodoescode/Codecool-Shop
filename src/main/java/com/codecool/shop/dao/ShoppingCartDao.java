@@ -9,4 +9,5 @@ public interface ShoppingCartDao {
     Product find(int id);
     void remove(int id);
     List<Product> getAllProducts();
+    String getTotalPrice();
 }
