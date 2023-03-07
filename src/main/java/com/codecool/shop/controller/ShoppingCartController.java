@@ -60,4 +60,7 @@ public class ShoppingCartController extends HttpServlet {
 
         engine.process("product/cart.html", context, response.getWriter());
     }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request,response);
+    }
 }
