@@ -24,6 +24,15 @@ public class Product extends BaseModel {
         return quantity;
     }
 
+
+    public String getSubtotalPrice() {
+        return String.valueOf(this.defaultPrice.multiply(BigDecimal.valueOf(quantity))) + " " + this.defaultCurrency.toString();
+    }
+
+    public BigDecimal getTotalPrice() {
+        return this.defaultPrice.multiply(BigDecimal.valueOf(quantity));
+    }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
