@@ -28,6 +28,7 @@ public class PaymentController extends HttpServlet {
 
         //  response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        engine.process("product/payment.html", context, response.getWriter());
 
     }
         protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException {

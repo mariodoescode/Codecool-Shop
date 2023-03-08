@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.HashMap;
 
 
 @WebServlet(urlPatterns = {"/shopping-cart"})
@@ -35,12 +36,16 @@ public class ShoppingCartController extends HttpServlet {
             Product product = productDao.find(productId);
             shoppingCart.add(product);
         }
+        HashMap<String, String> order = new HashMap<>();
         Enumeration paramNames = request.getParameterNames();
         while(paramNames.hasMoreElements()) {
             String nextName = (String) paramNames.nextElement();
-            System.out.println(nextName);
-            String nextValue = request.getParameter(nextName);
-            System.out.println(nextValue);
+            order.put(nextName,request.getParameter(nextName));
+            System.out.println(order);
+        } if(order.containsKey("country")) {
+            String site = "http://localhost:8888/payment" ;
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", site);
         }
         context.setVariable("products", shoppingCart.getAllProducts());
         context.setVariable("totalPrice", shoppingCart.getTotalPrice());
