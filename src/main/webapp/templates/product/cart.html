@@ -96,7 +96,7 @@
         <div class="row">
             <div class="col-75">
                 <div class="container" id="containerForm" style="display: none;">
-                    <form th:action="@{/payment}" style="display: none" id="formCheckout">
+                    <form th:action="@{/shopping-cart}" style="display: none" id="formCheckout">
 
                         <div class="row">
                             <div class="col-50">
@@ -104,7 +104,7 @@
                                 <label for="fname"><i class="fa fa-user"></i> Full Name</label>
                                 <input type="text" id="fname" name="firstname" placeholder="John M. Doe" required minlength="2" maxlength="8">
                                 <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                                <input type="text" id="email" name="email" placeholder="john@example.com" required minlength="11" maxlength="64">
+                                <input type="text" id="email" name="email" placeholder="john@example.com" required>
                                 <label for="phone-number"><i class="fa fa-institution"></i> Phone Number</label>
                                 <input type="text" id="phone-number" name="city" placeholder="1234-567-890" required minlength="2" maxlength="8">
 
