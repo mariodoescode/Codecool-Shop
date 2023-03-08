@@ -54,6 +54,13 @@ const btn = document.getElementById('checkout-button');
 
 btn.addEventListener('click', () => {
     const form = document.querySelector('div > form');
+    const showDiv = document.getElementById("containerForm");
+
+    if (showDiv.style.display === 'none') {
+        showDiv.style.display = 'block';
+    } else {
+        showDiv.style.display = 'none';
+    }
 
     if (form.style.display === 'none') {
         form.style.display = 'block';
