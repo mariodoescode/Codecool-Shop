@@ -37,5 +37,14 @@ window.onclick = function(event) {
     }
 }
 
+const btn = document.getElementById('checkout-button');
 
+btn.addEventListener('click', () => {
+    const form = document.querySelector('div > form');
 
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
+    }
+});

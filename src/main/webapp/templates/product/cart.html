@@ -47,7 +47,6 @@
                     <td>PRICE</td>
                     <td>PIECES</td>
                     <td>SUBTOTAL PRICE</td>
-                </th>
             </tr>
             <tr th:each="prod,iterStat : ${products}">
                 <td>
@@ -93,8 +92,22 @@
             </tr>
         </table>
     </div>
-    <div class="end-of-list">
-        <button type="submit" class="btn btn-success"><a id="checkout-button" href="/checkout">Checkout</a></button>
+    <div>
+        <form id="formCheckout" style="display: none">
+            <label>
+                <input type="text" placeholder="Your Name"/>
+                <input type="text" placeholder="Email"/>
+                <input type="text" placeholder="Phone Number"/>
+                <form action="/">
+                    <button>Go To Payment</button>
+                </form>
+            </label>
+
+        </form>
+
+            <button type="submit" class="btn btn-success"><a id="checkout-button">Checkout</a></button>
+
+        <script src="static/js/main.js"></script>
     </div>
 
 </div>

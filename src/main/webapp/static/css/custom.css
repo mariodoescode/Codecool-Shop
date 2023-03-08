@@ -1,3 +1,9 @@
+* {
+
+    text-align: center;
+
+}
+
 .glyphicon {
     margin-right:5px;
 }
@@ -113,9 +119,11 @@ body{
     margin-top: auto;
 }
 
+table, th, td {
+    border: 1px solid;
+}
+
 td {
     text-align: center;
     padding-right: 20px;
 }
-
-
