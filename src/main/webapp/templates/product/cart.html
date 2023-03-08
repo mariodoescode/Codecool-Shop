@@ -61,9 +61,16 @@
                 <td th:text="${prod.getPrice()}">
 
                 </td>
-                <td th:text="${prod.getQuantity()}">
+                <td>
+                    <form th:action="@{/shopping-cart}" method="post">
+                        <div>
+                            <label>
+                                <input id="input-box" type="number" th:name="quantity" th:attr="data-product-id=${prod.id}" th:value="${prod.getQuantity()}" style="width : 45px;"/>
+                            </label>
+                        </div>
+                    </form>
                 </td>
-                </td>
+
                 <td th:text="${prod.getSubtotalPrice()}">
                 </td>
                 <td>

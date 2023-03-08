@@ -8,15 +8,12 @@ import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
+
 
 @WebServlet(urlPatterns = {"/shopping-cart"})
 public class ShoppingCartController extends HttpServlet {
@@ -24,43 +21,45 @@ public class ShoppingCartController extends HttpServlet {
     ProductDao productDao = ProductDaoMem.getInstance();
     ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
 
-    private BigDecimal totalPrice;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
 
         //  response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        if(request.getParameter("id") != null){
+        if (request.getParameter("id") != null) {
             int productId = Integer.parseInt(request.getParameter("id"));
+            System.out.println(productId);
             Product product = productDao.find(productId);
             shoppingCart.add(product);
-        } else if (request.getParameter("plus") != null) {
-            int productId = Integer.parseInt(request.getParameter("plus"));
-            Product product = productDao.find(productId);
-            product.setQuantity(product.getQuantity() + 1);
         }
-        else if (request.getParameter("minus") != null) {
-            int productId = Integer.parseInt(request.getParameter("minus"));
-            Product product = productDao.find(productId);
-            if(product.getQuantity() <= 1){
-                shoppingCart.remove(productId);
-            }else{
-                product.setQuantity(product.getQuantity() - 1);
-            }
+        if (request.getParameter("quantity") != null) {
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+//            int productId = Integer.parseInt(request.getParameter("id"));
+//            System.out.println(productId);
+//            Product product = productDao.find(productId);
+            System.out.println(quantity);
+//            product.setQuantity(quantity);
+//            if(product.getQuantity() <= 1){
+//                shoppingCart.remove(productId);
+//            }
+        } else {
+            System.out.println("null");
         }
-        context.setVariable("products",shoppingCart.getAllProducts());
-        context.setVariable("totalPrice",shoppingCart.getTotalPrice());
+            context.setVariable("products", shoppingCart.getAllProducts());
+            context.setVariable("totalPrice", shoppingCart.getTotalPrice());
 
-        PrintWriter out = response.getWriter();
 
-        System.out.println(shoppingCart.getAllProducts());
+            System.out.println(shoppingCart.getAllProducts());
 
-        engine.process("product/cart.html", context, response.getWriter());
+            engine.process("product/cart.html", context, response.getWriter());
+        }
+
+    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException {
+        doGet(request, response);
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
-    }
+
+
 }
