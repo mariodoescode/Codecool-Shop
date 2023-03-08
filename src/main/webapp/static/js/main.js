@@ -1,5 +1,6 @@
 const addToCartButtons = document.querySelectorAll(".buttonAddToCart");
-console.dir(addToCartButtons);
+const inputBoxes = document.querySelectorAll("#input-box");
+console.dir(inputBoxes);
 
 
 addToCartButtons.forEach((addButton) => addButton.addEventListener('click', (event) => {
@@ -7,6 +8,18 @@ addToCartButtons.forEach((addButton) => addButton.addEventListener('click', (eve
         const url = `/shopping-cart?id=${event.target.dataset.productId}`;
         // fetchProduct(url);
         console.log(fetchProduct(url));
+    })
+)
+
+inputBoxes.forEach((inputBox) => inputBox.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+
+            console.log(event);
+            const url = `/shopping-cart?id=${inputBox.attributes['data-product-id'].value}`;
+            console.log(url);
+
+            fetchProduct(url);
+        }
     })
 )
 

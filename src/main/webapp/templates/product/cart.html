@@ -64,7 +64,7 @@
                     <form th:action="@{/shopping-cart}" method="post">
                         <div>
                             <label>
-                                <input type="number" name="quantity" th:attr="data-product-id=${prod.id}" th:placeholder="${prod.getQuantity()}" style="width : 45px;"/>
+                                <input id="input-box" type="number" th:name="quantity" th:attr="data-product-id=${prod.id}" th:value="${prod.getQuantity()}" style="width : 45px;"/>
                             </label>
                         </div>
                     </form>
