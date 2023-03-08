@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 
 @WebServlet(urlPatterns = {"/shopping-cart"})
@@ -31,31 +32,20 @@ public class ShoppingCartController extends HttpServlet {
 
         if (request.getParameter("id") != null) {
             int productId = Integer.parseInt(request.getParameter("id"));
-            System.out.println(productId);
             Product product = productDao.find(productId);
             shoppingCart.add(product);
         }
-        if (request.getParameter("quantity") != null) {
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-//            int productId = Integer.parseInt(request.getParameter("id"));
-//            System.out.println(productId);
-//            Product product = productDao.find(productId);
-            System.out.println(quantity);
-//            product.setQuantity(quantity);
-//            if(product.getQuantity() <= 1){
-//                shoppingCart.remove(productId);
-//            }
-        } else {
-            System.out.println("null");
+        Enumeration paramNames = request.getParameterNames();
+        while(paramNames.hasMoreElements()) {
+            String nextName = (String) paramNames.nextElement();
+            System.out.println(nextName);
+            String nextValue = request.getParameter(nextName);
+            System.out.println(nextValue);
         }
-            context.setVariable("products", shoppingCart.getAllProducts());
-            context.setVariable("totalPrice", shoppingCart.getTotalPrice());
-
-
-            System.out.println(shoppingCart.getAllProducts());
-
-            engine.process("product/cart.html", context, response.getWriter());
-        }
+        context.setVariable("products", shoppingCart.getAllProducts());
+        context.setVariable("totalPrice", shoppingCart.getTotalPrice());
+        engine.process("product/cart.html", context, response.getWriter());
+    }
 
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException {
         doGet(request, response);
