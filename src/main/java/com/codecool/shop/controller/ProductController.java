@@ -18,20 +18,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
+    ProductDao productDataStore = ProductDaoMem.getInstance();
+    ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+    SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+    ProductService productService = new ProductService(productDataStore,productCategoryDataStore, supplierDataStore);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore, supplierDataStore);
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+
         if (req.getParameter("category") != null) {
             String IdFromURL = req.getParameter("category");
             int convertedIDFromURL = Integer.parseInt(IdFromURL);
@@ -41,13 +42,10 @@ public class ProductController extends HttpServlet {
             int convertedIDFromURL = Integer.parseInt(IdFromURL);
             context.setVariable("products", productService.getProductsForSupplier(convertedIDFromURL));
         } else {
-            //  GET ALL PRODUCTS
             context.setVariable("products", productService.getAllProducts());
         }
 
-        // CHOOSABLE CATEGORIES FOR SORT
         context.setVariable("categories", productService.getAllProductCategory());
-        // CHOOSABLE SUPPLIERS FOR SORT
         context.setVariable("suppliers", productService.getAllProductSupplier());
 
         engine.process("product/index.html", context, resp.getWriter());
