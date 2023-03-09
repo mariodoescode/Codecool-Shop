@@ -1,38 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:font-weight="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/card.css"/>
+    <script src="static/js/cardpayment.js" defer></script>
+    <title>Payment Page</title>
 </head>
-<body>
-peeposad
+<body style="weight: 1920px;width: 1080px;height: 1920px; background-color: #607999">
 <div class="col-50">
     <h3>Payment</h3>
-    <label>Accepted Cards</label>
-    <div class="icon-container">
-        <i class="fa fa-cc-visa" style="color:navy;"></i>
-        <i class="fa fa-cc-amex" style="color:blue;"></i>
-        <i class="fa fa-cc-mastercard" style="color:red;"></i>
-        <i class="fa fa-cc-discover" style="color:orange;"></i>
-    </div>
-    <label for="cname">Name on Card</label>
-    <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-    <label for="ccnum">Credit card number</label>
-    <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-    <label for="expmonth">Exp Month</label>
-    <input type="text" id="expmonth" name="expmonth" placeholder="September">
+    <label font-weight: bold;>Accepted Cards</label>
+        <button id="master-card-payment">Master Card</button>
+        <button id="paypal-card-payment">Paypal</button>
 
-    <div class="row">
-        <div class="col-50">
-            <label for="expyear">Exp Year</label>
-            <input type="text" id="expyear" name="expyear" placeholder="2018">
-        </div>
-        <div class="col-50">
-            <label for="cvv">CVV</label>
-            <input type="text" id="cvv" name="cvv" placeholder="352">
-        </div>
+        <form action="#" method="post" style="display: none">
+
+            <h1>Card Details</h1>
+
+            <section>
+                <label for="cc-number">Card number</label>
+                <!-- Allow for spaces and for shorter and longer payment card numbers -->
+                <input id="cc-number" name="cc-number" autocomplete="cc-number" inputmode="numeric" maxlength="50" pattern="[\d ]{10,30}" required>
+            </section>
+
+            <section>
+                <label for="cc-name">Name on card</label>
+                <input id="cc-name" name="cc-name" autocomplete="cc-name" maxlength="50" pattern="[\p{L} \-\.]+" required>
+            </section>
+
+            <section id="cc-exp-csc">
+                <div>
+                    <label for="cc-exp">Expiry date</label>
+                    <input id="cc-exp" name="cc-exp" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required>
+                </div>
+                <div>
+                    <label for="cc-csc">Security code</label>
+                    <input id="cc-csc" name="cc-csc" inputmode="numeric" maxlength="3" required>
+                    <div class="explanation">Back of card, last 3 digits</div>
+                </div>
+            </section>
+
+            <button id="complete-payment">Complete payment</button>
+
+        </form>
+
+    <form action="#" method="post" style="display: none" id="paypal-form">
+
+        <h1>Card Details</h1>
+
+        <section>
+            <label for="cc-numberPP">Username</label>
+            <!-- Allow for spaces and for shorter and longer payment card numbers -->
+            <input id="cc-numberPP" name="cc-number" autocomplete="cc-number" maxlength="50" pattern="[\d ]{10,30}" required>
+        </section>
+
+        <section>
+            <label for="cc-namePP">Password</label>
+            <input id="cc-namePP" name="cc-name" autocomplete="cc-name" maxlength="50" pattern="[\p{L} \-\.]+" required>
+        </section>
+
+
+        <button id="complete-paymentPP">Complete payment</button>
+
+    </form>
+
+
     </div>
-</div>
+
 
 </body>
 </html>

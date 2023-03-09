@@ -66,7 +66,7 @@
 }
 
 .dropbtn {
-    background-color: #3498DB;
+    background-color: #28a745;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -75,7 +75,7 @@
 }
 
 .dropbtn:hover, .dropbtn:focus {
-    background-color: #2980B9;
+    background-color: #28a745;
 }
 
 .dropdown {
@@ -107,6 +107,7 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #003554;
 }
 
 .footer {
@@ -118,6 +119,7 @@ table, th, td {
     text-align: center;
     padding-right: 20px;
     margin: 0 auto;
+    background-color: white;
 }
 
 input, label {
@@ -193,4 +195,3 @@ span.price {
     float: right;
     color: grey;
 }
-
