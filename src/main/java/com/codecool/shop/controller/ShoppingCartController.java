@@ -1,8 +1,10 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
@@ -20,6 +22,7 @@ public class ShoppingCartController extends HttpServlet {
 
     ProductDao productDao = ProductDaoMem.getInstance();
     ShoppingCartDao shoppingCart = ShoppingCartDaoMem.getInstance();
+    OrderDao orders = OrderDaoMem.getInstance();
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
@@ -33,6 +36,7 @@ public class ShoppingCartController extends HttpServlet {
             Product product = productDao.find(productId);
             shoppingCart.add(product);
         }
+        context.setVariable("orderID", orders.getLastOrderID());
         context.setVariable("products", shoppingCart.getAllProducts());
         context.setVariable("totalPrice", shoppingCart.getTotalPrice());
         engine.process("product/cart.html", context, response.getWriter());

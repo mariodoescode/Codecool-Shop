@@ -65,6 +65,7 @@
             <version>${version.javax.servlet.api}</version>
             <scope>provided</scope>
         </dependency>
+
         <!-- See comment at jetty plugin -->
         <!-- <dependency> -->
         <!--   <groupId>org.eclipse.jetty</groupId> -->
@@ -75,6 +76,22 @@
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
             <version>${version.thymeleaf}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.9.0</version>
         </dependency>
     </dependencies>
 </project>

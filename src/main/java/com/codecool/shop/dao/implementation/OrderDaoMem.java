@@ -34,8 +34,13 @@ public class OrderDaoMem implements OrderDao {
         return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
-//    @Override
-//    public int getId() {
-//        return id;
-//    }
+    @Override
+    public List<Order> getAllOrders() {
+        return data;
+    }
+
+    @Override
+    public int getLastOrderID() {
+        return data.size();
+    }
 }

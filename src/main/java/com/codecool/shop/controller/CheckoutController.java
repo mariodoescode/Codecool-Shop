@@ -37,11 +37,12 @@ public class CheckoutController extends HttpServlet {
                 request.getParameter("name"),request.getParameter("phone-number"),
                 request.getParameter("email"), request.getParameter("Baddress"),
                 request.getParameter("country"), request.getParameter("city"),
-                request.getParameter("zipCodeBA"), request.getParameter("Sddress"),
+                request.getParameter("zipCodeBA"), request.getParameter("Saddress"),
                 request.getParameter("Scountry"), request.getParameter("Scity"),
                 request.getParameter("Szip"))
         );
-        context.setVariable("orderID", order);
+
+        context.setVariable("orderID", order.getLastOrderID());
         //and if data is valid load payment page
         engine.process("product/payment.html", context, response.getWriter());
 

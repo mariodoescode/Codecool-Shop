@@ -1,32 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
     <title>eMAG</title>
 </head>
-<body>
-<div>
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-success buttonAddToCart"  th:attr="data-product-id=${prod.id}" href="cart.html">Add to cart</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+<body id="order-body">
+<div class="login-header"></div>
+    <h1>Oder details</h1>
+    <table id="main-table">
+        <table>
+            <tbody>
+                <tr>
+                    <th>Personal data</th>
+                </tr>
+                <tr>
+                    <td class="header">OrderID</td><td class="data" th:text="${order.id}"></td>
+                </tr>
+                <tr>
+                    <td class="header">Name</td><td class="data" th:text="${order.name}"></td>
+                </tr>
+                <tr>
+                    <td class="header">Phone Number</td><td class="data" th:text="${order.phoneNumber}"></td>
+                </tr>
+                <tr>
+                    <td class="header">Email</td><td class="data" th:text="${order.email}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+            <tr>
+                <th>Billing information</th>
+            </tr>
+            <tr>
+                <td class="header">Address</td><td class="data" th:text="${order.billingAddress}"></td>
+            </tr>
+            <tr>
+                <td class="header">Country</td><td class="data" th:text="${order.billingCountry}"></td>
+            </tr>
+            <tr>
+                <td class="header">City</td><td class="data" th:text="${order.billingCity}"></td>
+            </tr>
+            <tr>
+                <td class="header">Zipcode</td><td class="data" th:text="${order.billingZipCode}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Shipping information</th>
+                </tr>
+                <tr>
+                    <td class="header">Address</td><td class="data" th:text="${order.shippingAddress}"></td>
+                </tr>
+                <tr>
+                    <td class="header">Country</td><td class="data" th:text="${order.shippingCountry}"></td>
+                </tr>
+                <tr>
+                    <td class="header">City</td><td class="data" th:text="${order.shippingCity}"></td>
+                </tr>
+                <tr>
+                    <td class="header">Zipcode</td><td class="data" th:text="${order.shippingZipCode}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </table>
 </body>
 </html>

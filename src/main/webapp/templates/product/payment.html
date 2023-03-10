@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:font-weight="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/static/css/card.css"/>
@@ -13,7 +14,7 @@
         <button id="master-card-payment">Master Card</button>
         <button id="paypal-card-payment">Paypal</button>
 
-        <form action="#" method="post" style="display: none">
+        <form th:action="@{/confirmation}" method="post" style="display: none">
 
             <h1>Card Details</h1>
 
@@ -40,11 +41,11 @@
                 </div>
             </section>
 
-            <button id="complete-payment">Complete payment</button>
+            <button id="complete-payment" >Complete payment</button>
 
         </form>
 
-    <form action="#" method="post" style="display: none" id="paypal-form">
+    <form th:action="@{/confirmation}" method="post" style="display: none" id="paypal-form">
 
         <h1>Card Details</h1>
 
@@ -56,7 +57,7 @@
 
         <section>
             <label for="cc-namePP">Password</label>
-            <input id="cc-namePP" name="cc-name" autocomplete="cc-name" maxlength="50" pattern="[\p{L} \-\.]+" required>
+            <input type="password" id="cc-namePP" name="cc-name" autocomplete="cc-name" maxlength="50" pattern="[\p{L} \-\.]+" required >
         </section>
 
 

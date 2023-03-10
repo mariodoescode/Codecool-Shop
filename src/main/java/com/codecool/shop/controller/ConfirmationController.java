@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Order;
+import com.google.gson.Gson;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -35,18 +37,24 @@ public class ConfirmationController extends HttpServlet {
         //  response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        context.setVariable("products",order.find(Integer.parseInt(request.getParameter("orderID"))));
+        context.setVariable("order",order.find(order.getLastOrderID()));
+        System.out.println(order.find(order.getLastOrderID()));
 
-        if(request.getParameter("expyear")!=null) {
-            if (request.getParameter("expyear").equals("2018")) {
-                engine.process("product/confirmation.html", context, response.getWriter());
-                System.out.println("confirmation route");
-            } else {
-                int status = response.getStatus();
-                response.sendError(status, "Error while processing the payment");
-                System.out.println("else route");
-            }
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(order.find(order.getLastOrderID()));
+
+        String file = ".\\/src\\/order_detail.json";
+        FileWriter fw = null;
+
+        try {
+            fw = new FileWriter(file);
+            gson.toJson(jsonObject, fw);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+            engine.process("product/confirmation.html", context, response.getWriter());
     }
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws IOException {
         doGet(request, response);

@@ -1,11 +1,15 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 
-import java.util.HashMap;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.*;
 
 
-public class Order{
+@Getter
+@Setter
+public class Order {
     private int id;
     private String name;
     private String email;
@@ -20,7 +24,10 @@ public class Order{
     private String shippingZipCode;
 
 
-    public Order(String name, String phoneNumber, String email, String billingAddress,String billingCountry,String billingCity,String billingZipCode,String shippingAddress,String shippingCountry, String shippingCity, String shippingZipCode) {
+    public Order(String name, String phoneNumber, String email,
+                 String billingAddress,String billingCountry,String billingCity,
+                 String billingZipCode,String shippingAddress,String shippingCountry,
+                 String shippingCity, String shippingZipCode) {
         this.name = name;
         this.billingAddress = billingAddress;
         this.billingCity= billingCity;
@@ -42,4 +49,5 @@ public class Order{
     public int getId() {
         return this.id;
     }
+
 }
