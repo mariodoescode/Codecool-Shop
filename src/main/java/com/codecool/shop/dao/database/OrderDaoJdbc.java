@@ -24,6 +24,11 @@ public class OrderDaoJdbc implements OrderDao {
     }
 
     @Override
+    public List<Order> getAllOrders() {
+        return null;
+    }
+
+    @Override
     public int getLastOrderID() {
         return 0;
     }

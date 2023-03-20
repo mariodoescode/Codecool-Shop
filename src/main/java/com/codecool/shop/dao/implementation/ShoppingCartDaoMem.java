@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartDaoMem implements ShoppingCartDao {
-    private List<Product> data = new ArrayList<>();
+    private final List<Product> data = new ArrayList<>();
     private static ShoppingCartDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.

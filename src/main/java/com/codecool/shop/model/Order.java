@@ -4,6 +4,7 @@ package com.codecool.shop.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.*;
 
 
 @Getter

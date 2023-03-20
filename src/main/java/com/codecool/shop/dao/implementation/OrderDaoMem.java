@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoMem implements OrderDao {
-    private final List<Order> data = new ArrayList<>();
+    private List<Order> data = new ArrayList<>();
     private static OrderDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -35,7 +35,17 @@ public class OrderDaoMem implements OrderDao {
     }
 
     @Override
+    public List<Order> getAllOrders() {
+        return data;
+    }
+
+    @Override
     public int getLastOrderID() {
         return data.size();
+    }
+
+    @Override
+    public List<Order> getAll() {
+        return null;
     }
 }
