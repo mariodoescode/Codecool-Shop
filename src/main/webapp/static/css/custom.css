@@ -4,10 +4,6 @@
 .thumbnail
 {
     margin-bottom: 20px;
-    padding: 0px;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
 }
 .thumbnail img
 {
@@ -31,11 +27,10 @@
 }
 .item.list-group-item .thumbnail
 {
-    margin-bottom: 0px;
 }
 .item.list-group-item .caption
 {
-    padding: 9px 9px 0px 9px;
+    padding: 9px 9px 9px;
 }
 .item.list-group-item:nth-of-type(odd)
 {
@@ -88,7 +83,7 @@
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 8px 16px  rgba(0,0,0,0.2);
     z-index: 1;
 }
 

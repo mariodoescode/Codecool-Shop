@@ -10,8 +10,6 @@ public interface OrderDao {
 
     Order find(int id);
 
-    List<Order> getAllOrders();
-
     int getLastOrderID();
 
 }
