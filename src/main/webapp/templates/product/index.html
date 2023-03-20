@@ -26,6 +26,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <script src="/static/js/main.js" defer></script>
 </head>
 
 <body>
@@ -34,10 +35,38 @@
     <h1>Codecool Shop</h1>
 </div>
 
+<div class="card-text">
+    <a class="btn btn-success" href="/shopping-cart">Your shopping cart</a>
+</div>
+
+<dl>
+    <dd>
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Filter by category</button>
+            <div id="myDropdown" class="dropdown-content">
+                <span th:each="category,iterStat : ${categories}">
+                    <a th:href="@{'/?category=' + ${category.id}}" th:text="${category.name}"></a>
+                </span>
+            </div>
+        </div>
+    </dd>
+
+    <dd>
+        <div class="dropdown">
+            <button onclick="myFunctionSup()" class="dropbtn">Filter by suppliers</button>
+            <div id="myDropdownSup" class="dropdown-content">
+                <span th:each="supplier,iterStat : ${suppliers}">
+                    <a th:href="@{'/?supplier=' + ${supplier.id}}" th:text="${supplier.name}"></a>
+                </span>
+            </div>
+        </div>
+    </dd>
+</dl>
+
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
+<!--    <div class="card">-->
+<!--        <strong th:if="${category.name != null}" th:text="${category.name}"></strong>-->
+<!--    </div>-->
 
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
@@ -52,7 +81,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success buttonAddToCart"  th:attr="data-product-id=${prod.id}" href="cart.html">Add to cart</a>
                     </div>
                 </div>
             </div>
@@ -61,7 +90,7 @@
 
 </div>
 
-<div th:replace="footer.html :: copy"></div>
+<div class="footer" th:replace="footer.html :: copy"></div>
 
 </body>
 </html>
