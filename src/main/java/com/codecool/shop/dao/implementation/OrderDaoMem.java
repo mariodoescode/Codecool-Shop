@@ -38,4 +38,9 @@ public class OrderDaoMem implements OrderDao {
     public int getLastOrderID() {
         return data.size();
     }
+
+    @Override
+    public List<Order> getAll() {
+        return null;
+    }
 }

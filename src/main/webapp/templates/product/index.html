@@ -44,7 +44,7 @@
         <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn">Filter by category</button>
             <div id="myDropdown" class="dropdown-content">
-                <span th:each="category,iterStat : ${categories}">
+                <span th:each="category,iterStat : ${all_categories}">
                     <a th:href="@{'/?category=' + ${category.id}}" th:text="${category.name}"></a>
                 </span>
             </div>
@@ -55,7 +55,7 @@
         <div class="dropdown">
             <button onclick="myFunctionSup()" class="dropbtn">Filter by suppliers</button>
             <div id="myDropdownSup" class="dropdown-content">
-                <span th:each="supplier,iterStat : ${suppliers}">
+                <span th:each="supplier,iterStat : ${all_suppliers}">
                     <a th:href="@{'/?supplier=' + ${supplier.id}}" th:text="${supplier.name}"></a>
                 </span>
             </div>

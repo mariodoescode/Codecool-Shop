@@ -61,7 +61,9 @@ public class Initializer implements ServletContextListener {
         productDataStore = databaseManager.getProductDataStore();
         supplierDataStore = databaseManager.getSupplierDataStore();
         productCategoryDataStore = databaseManager.getProductCategoryDataStore();
-
+        System.out.println(productDataStore);
+        System.out.println(supplierDataStore);
+        System.out.println(productCategoryDataStore);
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
         supplierDataStore.add(amazon);
@@ -110,5 +112,9 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Acer Aspire 5", new BigDecimal("519"), "USD", "The Acer Aspire 5 is adequate for school use.", laptop, acer));
         productDataStore.add(new Product("Acer Aspire Vero", new BigDecimal("573"), "USD", "A unique eco-friendly laptop.", laptop, acer));
 
+
+        System.out.println(productDataStore);
+        System.out.println(supplierDataStore);
+        System.out.println(productCategoryDataStore);
     }
 }

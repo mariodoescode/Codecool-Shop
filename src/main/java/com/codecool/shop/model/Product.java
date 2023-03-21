@@ -6,10 +6,12 @@ import java.util.Currency;
 public class Product extends BaseModel {
 
     private BigDecimal defaultPrice;
-    private Currency defaultCurrency;
+    private String defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
     private int quantity;
+    private int supplierID;
+    private int categoryID;
 
 
     public Product(String name, BigDecimal defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
@@ -19,6 +21,26 @@ public class Product extends BaseModel {
         this.setProductCategory(productCategory);
         quantity = 1;
     }
+
+    public Product(String name, BigDecimal defaultPrice, String currencyString, String description, String categoryName, String supplierName, String categoryDepartment
+    , String categoryDescription, String supplierDescription) {
+        super(name,description);
+        this.defaultPrice = defaultPrice;
+        this.defaultCurrency =  currencyString;
+        this.description = description;
+        this.productCategory = new ProductCategory(categoryName,categoryDepartment,categoryDescription);
+        this.supplier = new Supplier(supplierName,supplierDescription);
+    }
+
+    public Product(String name, BigDecimal defaultPrice, String currencyString, String description, ProductCategory productCategory, int supplierID) {
+        super(name,description);
+        this.defaultPrice = defaultPrice;
+        this.defaultCurrency = currencyString;
+        this.description = description;
+        this.productCategory = productCategory;
+        this.supplierID = supplierID;
+    }
+
     public int getQuantity() {
 
         return quantity;
@@ -26,7 +48,7 @@ public class Product extends BaseModel {
 
 
     public String getSubtotalPrice() {
-        return String.valueOf(this.defaultPrice.multiply(BigDecimal.valueOf(quantity))) + " " + this.defaultCurrency.toString();
+        return String.valueOf(this.defaultPrice.multiply(BigDecimal.valueOf(quantity))) + " " + this.defaultCurrency;
     }
 
     public BigDecimal getTotalPrice() {
@@ -45,21 +67,21 @@ public class Product extends BaseModel {
         this.defaultPrice = defaultPrice;
     }
 
-    public Currency getDefaultCurrency() {
+    public String getDefaultCurrency() {
         return defaultCurrency;
     }
 
-    public void setDefaultCurrency(Currency defaultCurrency) {
+    public void setDefaultCurrency(String defaultCurrency) {
         this.defaultCurrency = defaultCurrency;
     }
 
     public String getPrice() {
-        return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
+        return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency;
     }
 
     public void setPrice(BigDecimal price, String currency) {
         this.defaultPrice = price;
-        this.defaultCurrency = Currency.getInstance(currency);
+        this.defaultCurrency = currency;
     }
 
     public ProductCategory getProductCategory() {
@@ -80,6 +102,14 @@ public class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+    public int getSupplierID() {
+        return supplierID;
+    }
+
+    public void setSupplierID(int id) {
+        this.supplierID = id;
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
@@ -91,7 +121,7 @@ public class Product extends BaseModel {
                 this.id,
                 this.name,
                 this.defaultPrice,
-                this.defaultCurrency.toString(),
+                this.defaultCurrency,
                 this.productCategory.getName(),
                 this.supplier.getName());
     }

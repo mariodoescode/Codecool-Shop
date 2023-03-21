@@ -76,15 +76,15 @@ public class DatabaseManager {
 
     private DataSource connect(Properties properties) throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        String url = properties.getProperty("url");
+
         String database = properties.getProperty("database");
         String user = properties.getProperty("user");
         String password = properties.getProperty("password");
-        String dao = properties.getProperty("dao");
 
         dataSource.setDatabaseName(database);
         dataSource.setUser(user);
         dataSource.setPassword(password);
+
 
         System.out.println("Trying to connect");
         dataSource.getConnection().close();

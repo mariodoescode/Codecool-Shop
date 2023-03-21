@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.DatabaseManager;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
@@ -9,6 +10,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.service.SupplierService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -18,13 +20,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
-    ProductDao productDataStore = ProductDaoMem.getInstance();
-    ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-    SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+    DatabaseManager databaseManager = DatabaseManager.getInstance();
+    ProductDao productDataStore = databaseManager.getProductDataStore();
+    ProductCategoryDao productCategoryDataStore = databaseManager.getProductCategoryDataStore();
+    SupplierDao supplierDataStore = databaseManager.getSupplierDataStore();
     ProductService productService = new ProductService(productDataStore,productCategoryDataStore, supplierDataStore);
+    SupplierService supplierService = new SupplierService(supplierDataStore);
+
+    public ProductController() throws IOException {
+    }
 
 
     @Override
@@ -32,12 +40,11 @@ public class ProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-
         if (req.getParameter("category") != null) {
             String IdFromURL = req.getParameter("category");
             int convertedIDFromURL = Integer.parseInt(IdFromURL);
             context.setVariable("products", productService.getProductsForCategory(convertedIDFromURL));
-        } else if (req.getParameter("supplier") != null){
+        } else if (req.getParameter("supplier") != null) {
             String IdFromURL = req.getParameter("supplier");
             int convertedIDFromURL = Integer.parseInt(IdFromURL);
             context.setVariable("products", productService.getProductsForSupplier(convertedIDFromURL));
@@ -45,8 +52,9 @@ public class ProductController extends HttpServlet {
             context.setVariable("products", productService.getAllProducts());
         }
 
-        context.setVariable("categories", productService.getAllProductCategory());
-        context.setVariable("suppliers", productService.getAllProductSupplier());
+
+        context.setVariable("all_categories", productService.getAllCategories());
+        context.setVariable("all_suppliers", supplierService.getAllSuppliers());
 
         engine.process("product/index.html", context, resp.getWriter());
 
