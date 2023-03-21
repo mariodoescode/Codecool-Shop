@@ -1,18 +1,17 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.DatabaseManager;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.service.SupplierService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
+import com.codecool.shop.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +29,8 @@ public class ProductController extends HttpServlet {
     SupplierDao supplierDataStore = databaseManager.getSupplierDataStore();
     ProductService productService = new ProductService(productDataStore,productCategoryDataStore, supplierDataStore);
     SupplierService supplierService = new SupplierService(supplierDataStore);
+    UserDao userDao = databaseManager.getUserDao();
+    UserService userService = new UserService(userDao);
 
     public ProductController() throws IOException {
     }
@@ -53,6 +54,7 @@ public class ProductController extends HttpServlet {
         }
 
 
+        context.setVariable("user", userService);
         context.setVariable("all_categories", productService.getAllCategories());
         context.setVariable("all_suppliers", supplierService.getAllSuppliers());
 
