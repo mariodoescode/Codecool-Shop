@@ -4,8 +4,9 @@ import com.codecool.shop.config.TemplateEngineUtil;
 
 import com.codecool.shop.dao.DatabaseManager;
 import com.codecool.shop.dao.UserDao;
-
+import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.User;
+import com.codecool.shop.service.ShoppingCartService;
 import com.codecool.shop.service.UserService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -30,7 +31,8 @@ public class RegistrationController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        engine.process("product/registration.html", context, resp.getWriter());
+        resp.setCharacterEncoding("UTF-8");
+        engine.process("product/registerpage.html", context, resp.getWriter());
     }
 
     @Override
@@ -49,6 +51,7 @@ public class RegistrationController extends HttpServlet {
 //        response.sendRedirect("product/index.html");
 //
 //        pw.close();
+        response.setCharacterEncoding("UTF-8");
         User user = new User(request.getParameter("email"), request.getParameter("password"), request.getParameter("name"));
         if (request.getParameter("phone_number") != null){
             user.setPhone_number(request.getParameter("phone_number"));
@@ -78,9 +81,13 @@ public class RegistrationController extends HttpServlet {
             user.setShipping_address(request.getParameter("shipping_address"));
         }
         UserDao userDao = DatabaseManager.getInstance().getUserDao();
+        ShoppingCartDao shoppingCartDao = DatabaseManager.getInstance().getShoppingCartDao();
         UserService userService = new UserService(userDao);
+        ShoppingCartService shoppingCartService = new ShoppingCartService(shoppingCartDao);
         try {
             if (userService.registration(user)){
+                shoppingCartService.addUser(userDao.getLastUserID());
+                userService.addShoppingCart(userDao.getLastUserID(),shoppingCartService.getShoppingCartID());
                 response.sendRedirect(request.getContextPath()+"/");
             }
             else {

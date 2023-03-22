@@ -44,4 +44,8 @@ public class UserService {
         customerData.put("shippingCountry", user.getShipping_country());
         return customerData;
     }
+
+    public void addShoppingCart(int lastUserID, int shoppingCartID) {
+        userDao.addShoppingCart(lastUserID,shoppingCartID);
+    }
 }

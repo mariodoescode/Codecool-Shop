@@ -14,6 +14,7 @@ public class User {
     private String shipping_city;
     private String shipping_zipcode;
     private String shipping_address;
+    private int shoppingCartID;
 
     public User(String email, String password, String name) {
         this.email = email;
@@ -28,6 +29,14 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public int getShoppingCartID() {
+        return shoppingCartID;
+    }
+
+    public void setShoppingCartID(int shoppingCartID) {
+        this.shoppingCartID = shoppingCartID;
     }
 
     public String getEmail() {

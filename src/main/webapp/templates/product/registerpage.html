@@ -1,73 +1,88 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:font-weight="http://www.w3.org/1999/xhtml">
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/static/css/card.css"/>
-  <script src="static/js/cardpayment.js" defer></script>
-  <title>Payment Page</title>
+  <meta charset="utf-8" />
 </head>
-<body style="weight: 1920px;width: 1080px;height: 1920px; background-color: #607999">
-<div class="col-50">
-  <h3>Payment</h3>
-  <label font-weight: bold;>Accepted Cards</label>
-  <button id="master-card-payment">Master Card</button>
-  <button id="paypal-card-payment">Paypal</button>
+<body>
 
-  <form th:action="@{/confirmation}" method="post" style="display: none">
+<form class="form-horizontal" action='/registration' method="POST">
+  <fieldset>
+    <div id="legend">
+      <legend class="">Register</legend>
+    </div>
 
-    <h1>Card Details</h1>
-
-    <section>
-      <label for="cc-number">Card number</label>
-      <!-- Allow for spaces and for shorter and longer payment card numbers -->
-      <input id="cc-number" name="cc-number" autocomplete="cc-number" inputmode="numeric" maxlength="50" pattern="[\d ]{10,30}" required>
-    </section>
-
-    <section>
-      <label for="cc-name">Name on card</label>
-      <input id="cc-name" name="cc-name" autocomplete="cc-name" maxlength="50" pattern="[\p{L} \-\.]+" required>
-    </section>
-
-    <section id="cc-exp-csc">
-      <div>
-        <label for="cc-exp">Expiry date</label>
-        <input id="cc-exp" name="cc-exp" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required>
+    <div class="control-group">
+      <!-- E-mail -->
+      <label class="control-label" for="email">E-mail</label>
+      <div class="controls">
+        <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+        <p class="help-block">Please provide your E-mail</p>
       </div>
-      <div>
-        <label for="cc-csc">Security code</label>
-        <input id="cc-csc" name="cc-csc" inputmode="numeric" maxlength="3" required>
-        <div class="explanation">Back of card, last 3 digits</div>
+    </div>
+
+    <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" for="password">Password</label>
+      <div class="controls">
+        <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+        <p class="help-block">Password should be at least 4 characters</p>
       </div>
-    </section>
+    </div>
 
-    <button id="complete-payment" >Complete payment</button>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="name">Full name</label>
+      <div class="controls">
+        <input type="text" id="name" name="name" placeholder="" class="input-xlarge">
+        <p class="help-block">Please enter your full name</p>
+      </div>
+    </div>
 
-  </form>
-
-  <form th:action="@{/confirmation}" method="post" style="display: none" id="paypal-form">
-
-    <h1>Card Details</h1>
-
-    <section>
-      <label for="cc-numberPP">Username</label>
-      <!-- Allow for spaces and for shorter and longer payment card numbers -->
-      <input id="cc-numberPP" name="cc-number" autocomplete="cc-number" maxlength="50" pattern="[\d ]{10,30}" required>
-    </section>
-
-    <section>
-      <label for="cc-namePP">Password</label>
-      <input type="password" id="cc-namePP" name="cc-name" autocomplete="cc-name" maxlength="50" pattern="[\p{L} \-\.]+" required >
-    </section>
+    <div class="control-group">
+      <div class="controls">
+        <label for="phone_number"><i class="fa fa-address-card-o"></i> Phone number</label>
+        <input type="text" id="phone_number" name="phone_number" placeholder="33 677 8798">
+      </div>
+    </div>
 
 
-    <button id="complete-paymentPP">Complete payment</button>
+    <div class="control-group">
+      <div class="controls">
+        <h3>Billing Address</h3>
 
-  </form>
+        <label for="billing_country"><i class="fa fa-address-card-o"></i> Billing country</label>
+        <input type="text" id="billing_country" name="billing_country" placeholder="USA">
 
+        <label for="billing_city"><i class="fa fa-address-card-o"></i> Billing city</label>
+        <input type="text" id="billing_city" name="billing_city" placeholder="Washington">
 
-</div>
+        <label for="billing_zip"><i class="fa fa-address-card-o"></i> Billing ZIP</label>
+        <input type="text" id="billing_zip" name="billing_zip" placeholder="23412">
 
+        <label for="billing_address"><i class="fa fa-address-card-o"></i> Billing Address</label>
+        <input type="text" id="billing_address" name="billing_address" placeholder="Elm street 142.">
+
+        <h3>Shipping Address</h3>
+        <label for="shipping_country"><i class="fa fa-address-card-o"></i> Shipping country</label>
+        <input type="text" id="shipping_country" name="shipping_country" placeholder="USA">
+
+        <label for="shipping_city"><i class="fa fa-address-card-o"></i> Shipping city</label>
+        <input type="text" id="shipping_city" name="shipping_city" placeholder="Washington">
+
+        <label for="shipping_zip"><i class="fa fa-address-card-o"></i> Shipping ZIP</label>
+        <input type="text" id="shipping_zip" name="shipping_zip" placeholder="23412">
+
+        <label for="shipping_address"><i class="fa fa-address-card-o"></i> Shipping Address</label>
+        <input type="text" id="shipping_address" name="shipping_address" placeholder="Elm street 142.">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+        <button type="submit" formaction="/registration" formmethod="post" class="btn btn-success">Register</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
 
 </body>
 </html>

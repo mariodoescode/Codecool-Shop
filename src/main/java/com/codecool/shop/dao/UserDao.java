@@ -10,4 +10,8 @@ public interface UserDao {
     void add(User user) throws SQLException;
     User find(int id);
     User findByEmail(String email) throws SQLException;
+
+    int getLastUserID() throws SQLException;
+
+    int addShoppingCart(int lastUserID, int shoppingCartID);
 }

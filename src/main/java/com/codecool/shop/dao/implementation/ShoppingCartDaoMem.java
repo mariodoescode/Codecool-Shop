@@ -4,6 +4,7 @@ import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.Product;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,15 @@ public class ShoppingCartDaoMem implements ShoppingCartDao {
             price = price.add(product.getTotalPrice());
         }
         return totalPrice + price + "USD";
+    }
+
+    @Override
+    public int countShoppingCarts() {
+        return 0;
+    }
+
+    @Override
+    public void addUser(int lastUserID) throws SQLException {
     }
 
 }

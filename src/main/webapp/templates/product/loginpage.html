@@ -1,33 +1,51 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:font-weight="http://www.w3.org/1999/xhtml">
+<!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/static/css/login.css"/>
-  <title>Login Page</title>
+  <meta charset="utf-8" />
+  <meta name="author" content="Codecool" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
 </head>
 <body>
 
-<div class="login-form">
-  <form>
-    <h1>Login</h1>
-    <div class="content">
-      <div class="input-field">
-        <input type="email" placeholder="Email" autocomplete="nope">
-      </div>
-      <div class="input-field">
-        <input type="password" placeholder="Password" autocomplete="new-password">
-      </div>
-      <a href="#" class="link">Forgot Your Password?</a>
+
+<form class="form-horizontal" action='' method="POST">
+  <fieldset>
+    <div id="legend">
+      <legend class="">Login</legend>
     </div>
-    <div class="action">
-      <button>Register</button>
-      <button>Sign in</button>
+
+    <div class="control-group">
+      <!-- E-mail -->
+      <label class="control-label" for="login_email">E-mail</label>
+      <div class="controls">
+        <input type="text" id="login_email" name="login_email" placeholder="" class="input-xlarge">
+        <p class="help-block">Please provide your E-mail</p>
+      </div>
     </div>
-  </form>
-</div>
-<!-- partial -->
-<!--<script  src="./script.js"></script>-->
+
+    <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" for="login_password">Password</label>
+      <div class="controls">
+        <input type="password" id="login_password" name="login_password" placeholder="" class="input-xlarge">
+        <p class="help-block">Password should be at least 4 characters</p>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+        <button type="submit" formaction="/login" formmethod="post" class="btn btn-success">Login</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
 
 </body>
 </html>

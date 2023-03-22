@@ -22,6 +22,10 @@ public class DatabaseManager {
     private ProductCategoryDao productCategoryDataStore;
     private OrderDao orderDataStore;
     private UserDao userDao;
+    private ShoppingCartDao shoppingCartDao;
+
+
+
 
     private DatabaseManager() throws IOException {
         properties = initializeProperties();
@@ -53,6 +57,9 @@ public class DatabaseManager {
     public OrderDao getOrderDataStore() {
         return orderDataStore;
     }
+    public ShoppingCartDao getShoppingCartDao() {
+        return shoppingCartDao;
+    }
 
 
     public void setup() throws IOException, SQLException {
@@ -62,6 +69,7 @@ public class DatabaseManager {
         supplierDataStore = new SupplierDaoJdbc(dataSource);
         productCategoryDataStore = new ProductCategoryDaoJdbc(dataSource);
         orderDataStore = new OrderDaoJdbc(dataSource);
+        shoppingCartDao = new ShoppingCartDaoJdbc(dataSource);
 
     }
 
