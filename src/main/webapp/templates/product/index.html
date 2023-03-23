@@ -30,18 +30,22 @@
 </head>
 
 <body>
-
-<div class="jumbotron text-center">
+<div style="background-color: #333333">
+    <div class="card-text" style ="float: left; margin: 10px;"><button class="btn btn-success" href="/registration">Register here!</button></div>
+    <div class="card-text" style ="float: left; margin: 10px;"><button class="btn btn-success" href="/login">Log in!</button></div>
+    <div class="card-text" style ="float: left; margin: 10px; color: white"  th:text="${user} ?: 'Please login' " ></div>
+    <div class="card-text">
+        <a class="btn btn-success" href="/shopping-cart" style="margin: 10px 10px 10px 1350px;">Your shopping cart</a>
+    </div>
+</div>
+<div class="jumbotron text-center" style="height: 200px">
     <h1>Codecool Shop</h1>
-    <div class="card-text" style ="float: left; margin-left: -10px;"><button class="btn btn-success">Register here!</button></div>
-    <div class="card-text" style ="float: left; margin-left: -125px; margin-top: 45px"><button class="btn btn-success">Log in!</button></div>
+
 </div>
 
-<div class="card-text">
-    <a class="btn btn-success" href="/shopping-cart">Your shopping cart</a>
-</div>
 
-<span th:text="${user} ?: 'Please login' " ></span>
+
+
 <dl>
     <dd>
         <div class="dropdown">

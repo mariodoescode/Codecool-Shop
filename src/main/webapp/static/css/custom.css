@@ -102,7 +102,7 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #003554;
+    background-color: #333333;
 }
 
 .footer {
@@ -110,11 +110,13 @@ body{
 }
 
 table, thead, td, tr {
-    border: 1px solid;
+    border: 5px;
+    border-radius: 30px;
     text-align: center;
     padding-right: 20px;
     margin: 0 auto;
     background-color: white;
+    font-family: "Arial Black", sans-serif;
 }
 #order-body {
     background: white;
@@ -198,4 +200,10 @@ label {
 span.price {
     float: right;
     color: grey;
+}
+
+.green-text{
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
 }
