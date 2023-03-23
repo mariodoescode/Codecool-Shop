@@ -52,8 +52,9 @@ public class ProductController extends HttpServlet {
         } else {
             context.setVariable("products", productService.getAllProducts());
         }
-
-
+        if (req.getSession().getAttribute("user") != null) {
+            context.setVariable("user", req.getSession().getAttribute("user") );
+        }
         context.setVariable("all_categories", productService.getAllCategories());
         context.setVariable("all_suppliers", supplierService.getAllSuppliers());
 
