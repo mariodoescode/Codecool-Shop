@@ -22,66 +22,63 @@
     <!-- End of Bootstrap components -->
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
-    <title>eMAG</title>
+    <title>Codecool Shop</title>
 </head>
 <body id="order-body">
 <div class="login-header"></div>
-    <h1>Oder details</h1>
+    <h1 style="text-align: center">Oder details</h1>
     <table id="main-table">
-        <table>
+        <table style="border: 10px; border: #333333;">
             <tbody>
                 <tr>
                     <th>Personal data</th>
                 </tr>
                 <tr>
-                    <td class="header">OrderID</td><td class="data" th:text="${order.id}"></td>
-                </tr>
-                <tr>
                     <td class="header">Name</td><td class="data" th:text="${order.name}"></td>
                 </tr>
                 <tr>
-                    <td class="header">Phone Number</td><td class="data" th:text="${order.phoneNumber}"></td>
+                    <td class="header">Phone Number</td><td class="data" th:text="${order.phone_number}"></td>
                 </tr>
                 <tr>
                     <td class="header">Email</td><td class="data" th:text="${order.email}"></td>
                 </tr>
             </tbody>
         </table>
-        <table>
+        <table style="border: 10px; border: #333333;">
             <tbody>
             <tr>
                 <th>Billing information</th>
             </tr>
             <tr>
-                <td class="header">Address</td><td class="data" th:text="${order.billingAddress}"></td>
+                <td class="header">Address</td><td class="data" th:text="${order.billing_address}"></td>
             </tr>
             <tr>
-                <td class="header">Country</td><td class="data" th:text="${order.billingCountry}"></td>
+                <td class="header">Country</td><td class="data" th:text="${order.billing_country}"></td>
             </tr>
             <tr>
-                <td class="header">City</td><td class="data" th:text="${order.billingCity}"></td>
+                <td class="header">City</td><td class="data" th:text="${order.billing_city}"></td>
             </tr>
             <tr>
-                <td class="header">Zipcode</td><td class="data" th:text="${order.billingZipCode}"></td>
+                <td class="header">Zipcode</td><td class="data" th:text="${order.billing_zipcode}"></td>
             </tr>
             </tbody>
         </table>
-        <table>
+        <table style="border: 10px; border: #333333 ;">
             <tbody>
                 <tr>
                     <th>Shipping information</th>
                 </tr>
                 <tr>
-                    <td class="header">Address</td><td class="data" th:text="${order.shippingAddress}"></td>
+                    <td class="header">Address</td><td class="data" th:text="${order.shipping_address}"></td>
                 </tr>
                 <tr>
-                    <td class="header">Country</td><td class="data" th:text="${order.shippingCountry}"></td>
+                    <td class="header">Country</td><td class="data" th:text="${order.shipping_country}"></td>
                 </tr>
                 <tr>
-                    <td class="header">City</td><td class="data" th:text="${order.shippingCity}"></td>
+                    <td class="header">City</td><td class="data" th:text="${order.shipping_city}"></td>
                 </tr>
                 <tr>
-                    <td class="header">Zipcode</td><td class="data" th:text="${order.shippingZipCode}"></td>
+                    <td class="header">Zipcode</td><td class="data" th:text="${order.shipping_zipcode}"></td>
                 </tr>
             </tbody>
         </table>
