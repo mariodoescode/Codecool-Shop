@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.database.DatabaseManager;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
@@ -54,9 +55,13 @@ public class ProductController extends HttpServlet {
         }
         if (req.getSession().getAttribute("user") != null) {
             context.setVariable("user", req.getSession().getAttribute("user") );
+            context.setVariable("id", req.getSession().getAttribute("id") );
+        } else {
+            context.setVariable("user", "guest");
         }
         context.setVariable("all_categories", productService.getAllCategories());
         context.setVariable("all_suppliers", supplierService.getAllSuppliers());
+
 
         engine.process("product/index.html", context, resp.getWriter());
 

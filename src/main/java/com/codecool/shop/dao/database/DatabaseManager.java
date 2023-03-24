@@ -1,4 +1,13 @@
-package com.codecool.shop.dao;
+package com.codecool.shop.dao.database;
+
+import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.implementation.*;
+import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
+import org.postgresql.ds.PGSimpleDataSource;
+import com.codecool.shop.dao.database.LineItemDaoJdbc;
 
 import javax.sql.DataSource;
 import java.io.File;
@@ -7,25 +16,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.codecool.shop.dao.database.*;
-import com.codecool.shop.dao.implementation.OrderDaoMem;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import org.postgresql.ds.PGSimpleDataSource;
-
 public class DatabaseManager {
     private static DatabaseManager databaseManager = null;
+    private static DataSource dataSource;
     private static Properties properties;
     private ProductDao productDataStore;
     private SupplierDao supplierDataStore;
     private ProductCategoryDao productCategoryDataStore;
     private OrderDao orderDataStore;
     private UserDao userDao;
-    private ShoppingCartDao shoppingCartDao;
-
-
-
+    private LineItemDao lineItemDataStore;
 
     private DatabaseManager() throws IOException {
         properties = initializeProperties();
@@ -57,19 +57,19 @@ public class DatabaseManager {
     public OrderDao getOrderDataStore() {
         return orderDataStore;
     }
-    public ShoppingCartDao getShoppingCartDao() {
-        return shoppingCartDao;
+
+    public LineItemDao getLineItemDataStore() {
+        return lineItemDataStore;
     }
 
-
     public void setup() throws IOException, SQLException {
-        DataSource dataSource = connect(properties);
+        dataSource = connect(properties);
         userDao = new UserDaoJdbc(dataSource);
         productDataStore = new ProductDaoJdbc(dataSource);
         supplierDataStore = new SupplierDaoJdbc(dataSource);
         productCategoryDataStore = new ProductCategoryDaoJdbc(dataSource);
         orderDataStore = new OrderDaoJdbc(dataSource);
-        shoppingCartDao = new ShoppingCartDaoJdbc(dataSource);
+        lineItemDataStore = new LineItemDaoJdbc(dataSource);
 
     }
 
@@ -84,15 +84,15 @@ public class DatabaseManager {
 
     private DataSource connect(Properties properties) throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
-
+        String url = properties.getProperty("url");
         String database = properties.getProperty("database");
         String user = properties.getProperty("user");
         String password = properties.getProperty("password");
+        String dao = properties.getProperty("dao");
 
         dataSource.setDatabaseName(database);
         dataSource.setUser(user);
         dataSource.setPassword(password);
-
 
         System.out.println("Trying to connect");
         dataSource.getConnection().close();
@@ -111,5 +111,6 @@ public class DatabaseManager {
         productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         supplierDataStore = SupplierDaoMem.getInstance();
         orderDataStore = OrderDaoMem.getInstance();
+        lineItemDataStore = LineItemDaoMem.getInstance();
     }
 }

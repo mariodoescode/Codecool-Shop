@@ -46,32 +46,22 @@
                     <td>PRODUCT NAME</td>
                     <td>PRICE</td>
                     <td>PIECES</td>
-                    <td>SUBTOTAL PRICE</td>
             </tr>
-            <tr th:each="prod,iterStat : ${products}">
+            <tr th:each="item,iterStat : ${items}">
                 <td>
                     <img class="productImage" src="http://placehold.it/400x250/000/fff"
                          th:height="100"
                          th:width="120"
-                         th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                         th:attr="src='/static/img/product_' + ${item.getProductId()} + '.jpg'" alt=""/>
                 </td>
-                <td  th:text="${prod.name}">
+                <td  th:text="${item.getProductName()}">
                 </td>
-                <td th:text="${prod.getPrice()}">
+                <td th:text="${item.getProductPrice()}">
 
                 </td>
-                <td>
-                    <form th:action="@{/shopping-cart}" method="post">
-                        <div>
-                            <label>
-                                <input id="input-box" type="number" th:name="quantity" th:attr="data-product-id=${prod.id}" th:value="${prod.getQuantity()}" style="width : 45px;"/>
-                            </label>
-                        </div>
-                    </form>
+                <td th:text="${item.getQuantity()}">
                 </td>
 
-                <td th:text="${prod.getSubtotalPrice()}">
-                </td>
             </tr>
             <tr>
                 <td>TOTAL PRICE</td>
@@ -89,30 +79,30 @@
                             <div class="col-50">
                                 <h3>Personal Information</h3>
                                 <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                                <input type="text" id="fname" name="name" placeholder="John M. Doe" required minlength="1" maxlength="64">
+                                <input type="text" id="fname" name="name"  required minlength="1" maxlength="64" th:value="${loggedUser.getName()}">
                                 <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                                <input type="text" id="email" name="email" placeholder="john@example.com" required>
+                                <input type="text" id="email" name="email"  th:value="${loggedUser.getEmail()}" required>
                                 <label for="phone-number"><i class="fa fa-institution"></i> Phone Number</label>
-                                <input type="text" id="phone-number" name="phone-number" placeholder="1234-567-890" required minlength="10" maxlength="10">
+                                <input type="text" id="phone-number" name="phone-number"  th:value="${loggedUser.getPhone_number()}">
 
                                 <div class="row">
                                     <div class="col-50">
                                         <h3>Billing Address</h3>
                                         <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-                                        <input type="text" id="adr" name="Baddress" placeholder="542 W. 15th Street" required minlength="12" maxlength="121">
+                                        <input type="text" id="adr" name="Baddress"  th:value="${loggedUser.getBilling_address()}" required minlength="12" maxlength="121">
 
                                         <div class="row">
                                             <div class="col-50">
                                                 <label for="zip">Zip</label>
-                                                <input type="text" id="zip" name="zipCodeBA" placeholder="10001" required minlength="5" maxlength="5">
+                                                <input type="text" id="zip" name="zipCodeBA"  th:value="${loggedUser.getBilling_zipcode()}" required minlength="5" maxlength="5">
                                             </div>
                                             <div class="col-50">
                                                 <label for="country">Country</label>
-                                                <input type="text" id="country" name="country" placeholder="Germany" required minlength="4" maxlength="32">
+                                                <input type="text" id="country" name="country"  th:value="${loggedUser.getBilling_country()}" required minlength="4" maxlength="32">
                                             </div>
                                             <div class="col-50">
                                                 <label for="city">City</label>
-                                                <input type="text" id="city" name="city" placeholder="Berlin" required minlength="1" maxlength="85">
+                                                <input type="text" id="city" name="city"  th:value="${loggedUser.getBilling_city()}" required minlength="1" maxlength="85">
                                             </div>
                                         </div>
                                     </div>
@@ -123,20 +113,20 @@
                                 <div class="col-50">
                                     <h3>Shipment Address</h3>
                                     <label for="adrShip"><i class="fa fa-address-card-o"></i> Address</label>
-                                    <input type="text" id="adrShip" name="Saddress" placeholder="542 W. 15th Street" required minlength="12" maxlength="121">
+                                    <input type="text" id="adrShip" name="Saddress"  th:value="${loggedUser.getShipping_address()}" >
 
                                     <div class="row">
                                         <div class="col-50">
                                             <label for="zipShip">Zip</label>
-                                            <input type="text" id="zipShip" name="Szip" placeholder="10001" required minlength="5" maxlength="5">
+                                            <input type="text" id="zipShip" name="Szip"  th:value="${loggedUser.getShipping_zipcode()}" >
                                         </div>
                                         <div class="col-50">
                                             <label for="countryShip">Country</label>
-                                            <input type="text" id="countryShip" name="Scountry" placeholder="Germany" required minlength="4" maxlength="32">
+                                            <input type="text" id="countryShip" name="Scountry"  th:value="${loggedUser.getShipping_country()}" >
                                         </div>
                                         <div class="col-50">
                                             <label for="cityShip">City</label>
-                                            <input type="text" id="cityShip" name="Scity" placeholder="Berlin" required minlength="1" maxlength="85">
+                                            <input type="text" id="cityShip" name="Scity"  th:value="${loggedUser.getShipping_city()}" >
                                         </div>
                                     </div>
                                         <button type="submit" value="Go To Payment" class="btn">Go to Payment!</button>

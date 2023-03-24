@@ -1,6 +1,7 @@
 package com.codecool.shop.config;
 
 import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.database.DatabaseManager;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -51,7 +53,7 @@ public class Initializer implements ServletContextListener {
 //            orderDataStore.add(newOrder);
         }
         else {
-            databaseManager.setupMem();
+//            databaseManager.setupMem();
 //            orderDataStore = databaseManager.getOrderDataStore();
 //            int orderId = orderDataStore.getAll().size() + 1;
 //            Order newOrder = new Order(orderId);

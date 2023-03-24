@@ -1,53 +1,60 @@
 package com.codecool.shop.model;
 
+import com.google.gson.Gson;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-import java.io.*;
-
-
-@Getter
-@Setter
 public class Order {
     private int id;
-    private String name;
-    private String email;
-    private String phoneNumber;
-    private String billingAddress;
-    private String billingCountry;
-    private String billingCity;
-    private String billingZipCode;
-    private String shippingAddress;
-    private String shippingCountry;
-    private String shippingCity;
-    private String shippingZipCode;
+    private Date date;
+    private int userId;
+    private String status;
+
+    private HashMap<String, String> customerData;
 
 
-    public Order(String name, String phoneNumber, String email,
-                 String billingAddress,String billingCountry,String billingCity,
-                 String billingZipCode,String shippingAddress,String shippingCountry,
-                 String shippingCity, String shippingZipCode) {
-        this.name = name;
-        this.billingAddress = billingAddress;
-        this.billingCity= billingCity;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.billingCountry = billingCountry;
-        this.billingZipCode = billingZipCode;
-        this.shippingAddress = shippingAddress;
-        this.shippingCity = shippingCity;
-        this.shippingCountry = shippingCountry;
-        this.shippingZipCode = shippingZipCode;
+    public Order(int id) {
+        this.id = id;
+        this.date = new Date();
+        this.status = "checked";
     }
 
+    public Order(int id, int userId, Date date, String status) {
+        this.id = id;
+        this.date = date;
+        this.userId = userId;
+        this.status = status;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    // maybe we don't need setter for id
     public void setId(int id) {
         this.id = id;
     }
 
-    public int getId() {
-        return this.id;
+    public void setCustomerData(HashMap<String, String> customerData) {
+        this.customerData = customerData;
     }
 
+    public HashMap<String, String> getCustomerData() {
+        return customerData;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
 }

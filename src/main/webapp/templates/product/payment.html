@@ -47,17 +47,17 @@
 
     <form th:action="@{/confirmation}" method="post" style="display: none" id="paypal-form">
 
-        <h1>Card Details</h1>
+        <h1>PayPal account</h1>
 
         <section>
             <label for="cc-numberPP">Username</label>
             <!-- Allow for spaces and for shorter and longer payment card numbers -->
-            <input id="cc-numberPP" name="cc-number" autocomplete="cc-number" maxlength="50" pattern="[\d ]{10,30}" required>
+            <input id="cc-numberPP" name="cc-number" autocomplete="cc-number" maxlength="50"  required>
         </section>
 
         <section>
             <label for="cc-namePP">Password</label>
-            <input type="password" id="cc-namePP" name="cc-name" autocomplete="cc-name" maxlength="50" pattern="[\p{L} \-\.]+" required >
+            <input type="password" id="cc-namePP" name="cc-name" autocomplete="cc-name" maxlength="50" required >
         </section>
 
 

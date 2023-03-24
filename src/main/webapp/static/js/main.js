@@ -1,15 +1,32 @@
 const addToCartButtons = document.querySelectorAll(".buttonAddToCart");
 const inputBoxes = document.querySelectorAll("#input-box");
-console.dir(inputBoxes);
+let itemNumberContainer = document.getElementById("itemNumber");
 
 
-addToCartButtons.forEach((addButton) => addButton.addEventListener('click', (event) => {
-        console.log(event);
-        const url = `/shopping-cart?id=${event.target.dataset.productId}`;
-        // fetchProduct(url);
-        console.log(fetchProduct(url));
-    })
-)
+for(let link of addToCartButtons){
+    link.addEventListener('click', addItemToCart);
+}
+
+async function addItemToCart(event){
+    let prodName = event.target.dataset.name
+    let prodPrice = event.target.dataset.price
+    let description = event.target.dataset.desc
+    let supplier = event.target.dataset.supplier
+    let prod_id = event.target.dataset.prod_id
+    fetch('/order?prod_name=' + prodName + '&prod_price=' + prodPrice + '&desc=' + description + '&supplier=' + supplier + '&prod_id=' + prod_id)
+        .then(response => response.text())
+        .then((response) => {
+            addItemNumber(response)
+        })
+        .catch(err => console.log(err))
+
+}
+
+function addItemNumber(itemNumber) {
+    itemNumberContainer.innerHTML = '';
+    itemNumberContainer.innerHTML += `<p>${itemNumber}</p>`;
+
+}
 
 inputBoxes.forEach((inputBox) => inputBox.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {

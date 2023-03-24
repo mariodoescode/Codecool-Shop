@@ -43,8 +43,7 @@ CREATE TABLE public.users (
                     shipping_country text ,
                     shipping_city text ,
                     shipping_zip text ,
-                    shipping_address text,
-                    shoppingcart_id int
+                    shipping_address text
 );
 
 
@@ -57,18 +56,21 @@ CREATE TABLE public.order (
 );
 
 
-DROP TABLE IF EXISTS public.shopping_cart CASCADE;
-CREATE TABLE public.shopping_cart (
-                        id serial NOT NULL PRIMARY KEY ,
-                        user_id int NOT NULL ,
-                        product_id int
+DROP TABLE IF EXISTS public.line_item CASCADE;
+CREATE TABLE public.line_item (
+                          id serial NOT NULL PRIMARY KEY,
+                          quantity int NOT NULL,
+                          order_id int NOT NULL,
+                          product_id int NOT NULL
 );
 
 ALTER TABLE ONLY public.product
     ADD CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES public.category(id);
 ALTER TABLE ONLY public.product
     ADD CONSTRAINT fk_supplier_id FOREIGN KEY (supplier_id) REFERENCES public.supplier(id);
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT fk_shoppingCart_id FOREIGN KEY (shoppingCart_id) REFERENCES public.shopping_cart(id);
 ALTER TABLE ONLY public.order
     ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES public.users(id);
+ALTER TABLE ONLY public.line_item
+    ADD CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES public.order(id);
+ALTER TABLE ONLY public.line_item
+    ADD CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES public.product(id);

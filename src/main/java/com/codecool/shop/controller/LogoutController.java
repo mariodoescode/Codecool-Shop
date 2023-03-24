@@ -1,12 +1,5 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.DatabaseManager;
-import com.codecool.shop.dao.UserDao;
-import com.codecool.shop.model.User;
-import com.codecool.shop.service.UserService;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,14 +18,12 @@ import java.sql.SQLException;
             resp.setContentType("text/html");
             PrintWriter out=resp.getWriter();
 
-            req.getRequestDispatcher("index.html").include(req, resp);
+
 
             HttpSession session=req.getSession();
             session.invalidate();
+            resp.sendRedirect(req.getContextPath()+ "/");
 
-            out.print("You are successfully logged out!");
-
-            out.close();
 
         }
 

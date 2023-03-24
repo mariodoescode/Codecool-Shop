@@ -50,7 +50,7 @@ public class UserDaoJdbc implements UserDao {
     @Override
     public User findByEmail(String email) throws SQLException {
         try (Connection connection = dataSource.getConnection()){
-            String query = "SELECT id, email, password, name, billing_country, billing_city, billing_zip, billing_address FROM \"users\" WHERE email = ? ";
+            String query = "SELECT id, email, password, name, billing_country, billing_city, billing_zip, billing_address, phone_number, shipping_address, shipping_city, shipping_country, shipping_zip FROM \"users\" WHERE email = ? ";
             PreparedStatement st = connection.prepareStatement(query);
 //            st.setString(1, " ' " + email + " ' ");
             st.setString(1, email);
@@ -63,10 +63,17 @@ public class UserDaoJdbc implements UserDao {
             String emailAddress = resultSet.getString(2);
             String password = resultSet.getString(3);
             String name = resultSet.getString(4);
+            String phone_number = resultSet.getString(9);
             String billing_country = resultSet.getString(5);
             String billing_city = resultSet.getString(6);
             String billing_zipCode = resultSet.getString(7);
             String billing_address = resultSet.getString(8);
+
+            String shipping_address = resultSet.getString(10);
+            String shipping_country = resultSet.getString(11);
+            String shipping_city = resultSet.getString(12);
+            String shipping_zip = resultSet.getString(13);
+
 
             User user = new User(emailAddress, password, name);
             user.setId(id);
@@ -74,41 +81,17 @@ public class UserDaoJdbc implements UserDao {
             user.setBilling_city(billing_city);
             user.setBilling_country(billing_country);
             user.setBilling_zipcode(billing_zipCode);
+            user.setPhone_number(phone_number);
+            user.setShipping_address(shipping_address);
+            user.setShipping_country(shipping_country);
+            user.setShipping_city(shipping_city);
+            user.setShipping_zipcode(shipping_zip);
             return user;
         } catch (SQLException throwables){
             throw new RuntimeException("Error while finding email in database", throwables);
         }
     }
 
-    @Override
-    public int getLastUserID() throws SQLException {
-        try (Connection conn = dataSource.getConnection()) {
-            String sql = "SELECT count(name) FROM users";
-            ResultSet rs = conn.createStatement().executeQuery(sql);
-            if (!rs.next()) {
-                return 0;
-            }
-            System.out.println("count users id" + rs.getInt(1));
-            return rs.getInt(1);
 
-        }
-    }
-
-    @Override
-    public int addShoppingCart(int lastUserID, int shoppingCartID) {
-        int affectedrows = 0;
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "UPDATE \"users\" " +
-                        "SET shoppingcart_id = ? " +
-                        "WHERE id = ?";
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1,shoppingCartID);
-            st.setInt(2,lastUserID);
-            affectedrows = st.executeUpdate();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex.getMessage());
-        }
-        return affectedrows;
-    }
 
 }

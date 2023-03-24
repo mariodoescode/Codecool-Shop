@@ -2,11 +2,10 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 
-import com.codecool.shop.dao.DatabaseManager;
+
 import com.codecool.shop.dao.UserDao;
-import com.codecool.shop.dao.ShoppingCartDao;
+import com.codecool.shop.dao.database.DatabaseManager;
 import com.codecool.shop.model.User;
-import com.codecool.shop.service.ShoppingCartService;
 import com.codecool.shop.service.UserService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -17,9 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 @WebServlet(urlPatterns = {"/registration"})
 public class RegistrationController extends HttpServlet {
@@ -81,13 +78,9 @@ public class RegistrationController extends HttpServlet {
             user.setShipping_address(request.getParameter("shipping_address"));
         }
         UserDao userDao = DatabaseManager.getInstance().getUserDao();
-        ShoppingCartDao shoppingCartDao = DatabaseManager.getInstance().getShoppingCartDao();
         UserService userService = new UserService(userDao);
-        ShoppingCartService shoppingCartService = new ShoppingCartService(shoppingCartDao);
         try {
             if (userService.registration(user)){
-                shoppingCartService.addUser(userDao.getLastUserID());
-                userService.addShoppingCart(userDao.getLastUserID(),shoppingCartService.getShoppingCartID());
                 response.sendRedirect(request.getContextPath()+"/");
             }
             else {

@@ -1,15 +1,19 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.model.LineItem;
 import com.codecool.shop.model.Order;
-
+import com.codecool.shop.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoMem implements OrderDao {
-    private List<Order> data = new ArrayList<>();
+
+
+    private List<Order> orders = new ArrayList<>();
     private static OrderDaoMem instance = null;
+
 
     /* A private Constructor prevents any other class from instantiating.
      */
@@ -23,29 +27,41 @@ public class OrderDaoMem implements OrderDao {
         return instance;
     }
 
+
     @Override
     public void add(Order order) {
-        order.setId(data.size() + 1);
-        data.add(order);
+        orders.add(order);
     }
 
     @Override
     public Order find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+
+        for(Order order : orders){
+            if(order.getId() == id){
+                return order;
+            }
+        }
+        return null;
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return data;
-    }
+    public void remove(int id) {
 
-    @Override
-    public int getLastOrderID() {
-        return data.size();
     }
 
     @Override
     public List<Order> getAll() {
-        return null;
+        return orders;
     }
+
+    @Override
+    public int getOrderIdByUserId(int id) {
+        return 0;
+    }
+
+    @Override
+    public boolean userHasCheckedOrder(int userId) {
+        return false;
+    }
+
 }
