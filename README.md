@@ -2,7 +2,7 @@
 
 ## Description
 
-Welcome to Codecool Shop, an online eCommerce web-application where you can browse and purchase a variety of devices. Create an account to access exclusive offers, or log in if you already have an account. Choose your favorite gadget, add it to your cart, and complete your order. Payment can be made using either a card or PayPal.
+Welcome to Codecool Shop, an online eCommerce web-application where you can browse and purchase all sorts of devices. Create an account to have access to your own cart, or log in if you already have one. Explore the different categories of items, decide on what suits you best and put it in your cart, pay either by card or Paypal and enjoy a better life with powerful technology!
 
 ## Technologies Used
 
